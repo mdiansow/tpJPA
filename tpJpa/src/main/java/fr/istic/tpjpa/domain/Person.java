@@ -7,20 +7,12 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
 @Entity
 public class Person {
-
-	public Person() {
-	}
-
-	public Person(String nom, String prenom) {
-		super();
-		this.nom = nom;
-		this.prenom = prenom;
-	}
 
 	private Long id;
 	private String nom;
@@ -31,6 +23,18 @@ public class Person {
 	private String profilFb;
 
 	private List<Person> friends = new ArrayList<Person>();
+
+	/**
+	 * Default constructor
+	 */
+	public Person() {
+	}
+	
+	public Person(String nom, String prenom) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+	}
 
 	@Transient
 	private List<Home> homes;
@@ -52,8 +56,6 @@ public class Person {
 		this.id = id;
 	}
 
-	
-
 	public String toString() {
 		return "Person[id=" + id + " , Nom=" + this.nom + "]";
 	}
@@ -66,7 +68,8 @@ public class Person {
 	}
 
 	/**
-	 * @param nom the nom to set
+	 * @param nom
+	 *            the nom to set
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
@@ -80,7 +83,8 @@ public class Person {
 	}
 
 	/**
-	 * @param prenom the prenom to set
+	 * @param prenom
+	 *            the prenom to set
 	 */
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
@@ -94,7 +98,8 @@ public class Person {
 	}
 
 	/**
-	 * @param genre the genre to set
+	 * @param genre
+	 *            the genre to set
 	 */
 	public void setGenre(char genre) {
 		this.genre = genre;
@@ -108,7 +113,8 @@ public class Person {
 	}
 
 	/**
-	 * @param mail the mail to set
+	 * @param mail
+	 *            the mail to set
 	 */
 	public void setMail(String mail) {
 		this.mail = mail;
@@ -122,7 +128,8 @@ public class Person {
 	}
 
 	/**
-	 * @param dateNaiss the dateNaiss to set
+	 * @param dateNaiss
+	 *            the dateNaiss to set
 	 */
 	public void setDateNaiss(Date dateNaiss) {
 		this.dateNaiss = dateNaiss;
@@ -136,7 +143,8 @@ public class Person {
 	}
 
 	/**
-	 * @param profilFb the profilFb to set
+	 * @param profilFb
+	 *            the profilFb to set
 	 */
 	public void setProfilFb(String profilFb) {
 		this.profilFb = profilFb;
@@ -146,45 +154,47 @@ public class Person {
 	 * @return the friends
 	 */
 	@ManyToMany
+	@JoinColumn(name = "Friends")
 	public List<Person> getFriends() {
 		return new ArrayList<Person>(this.friends);
 	}
 
 	/**
-	 * @param friends the friends to set
+	 * @param friends
+	 *            the friends to set
 	 */
 	public void setFriends(List<Person> friends) {
 		this.friends = friends;
-//		for(Person next : friends){
-//			this.friends.add(next);
-//		}
+		// for(Person next : friends){
+		// this.friends.add(next);
+		// }
 	}
 
-//	/**
-//	 * @return the friends
-//	 */
-//	public List<Person> getFriends() {
-//		return friends;
-//	}
-//
-//	/**
-//	 * @param friends the friends to set
-//	 */
-//	public void setFriends(List<Person> friends) {
-//		this.friends = friends;
-//	}
-//
-//	/**
-//	 * @return the homes
-//	 */
-//	public List<Home> getHomes() {
-//		return homes;
-//	}
-//
-//	/**
-//	 * @param homes the homes to set
-//	 */
-//	public void setHomes(List<Home> homes) {
-//		this.homes = homes;
-//	}
+	// /**
+	// * @return the friends
+	// */
+	// public List<Person> getFriends() {
+	// return friends;
+	// }
+	//
+	// /**
+	// * @param friends the friends to set
+	// */
+	// public void setFriends(List<Person> friends) {
+	// this.friends = friends;
+	// }
+	//
+	// /**
+	// * @return the homes
+	// */
+	// public List<Home> getHomes() {
+	// return homes;
+	// }
+	//
+	// /**
+	// * @param homes the homes to set
+	// */
+	// public void setHomes(List<Home> homes) {
+	// this.homes = homes;
+	// }
 }

@@ -65,10 +65,14 @@ public class JpaTest {
 			
 			listPersonne1.add(p4);
 			persons4.add(p1);
+			
+			listPerson2.add(p1);
+			listPersonne1.add(p2);
 		
 			p4.setFriends(persons4);
 			p1.setFriends(listPersonne1);
 			p3.setFriends(persons3);
+			p2.setFriends(listPerson2);
 			
 			manager.persist(p1);
 			manager.persist(p2);
