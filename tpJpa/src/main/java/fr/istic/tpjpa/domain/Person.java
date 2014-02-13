@@ -4,197 +4,200 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.Transient;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Person")
 public class Person {
 
-	private Long id;
-	private String nom;
-	private String prenom;
-	private char genre;
-	private String mail;
-	private Date dateNaiss;
-	private String profilFb;
+    private Long id;
+    private String nom;
+    private String prenom;
+    private char genre;
+    private String mail;
+    private Date dateNaiss;
+    private String profilFb;
 
-	private List<Person> friends = new ArrayList<Person>();
+    private List<Person> friends = new ArrayList<Person>();
 
-	/**
-	 * Default constructor
-	 */
-	public Person() {
-	}
-	
-	public Person(String nom, String prenom) {
-		super();
-		this.nom = nom;
-		this.prenom = prenom;
-	}
+    private List<Home> homes = new ArrayList<Home>();
 
-	@Transient
-	private List<Home> homes;
+    private List<ElectronicDevice> devices = new ArrayList<ElectronicDevice>();
 
-	/**
-	 * @return the id
-	 */
-	@Id
-	@GeneratedValue
-	public Long getId() {
-		return id;
-	}
+    /**
+     * Default constructor
+     */
+    public Person() {
+    }
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Person(String nom, String prenom) {
+        this.nom = nom;
+        this.prenom = prenom;
+    }
 
-	public String toString() {
-		return "Person[id=" + id + " , Nom=" + this.nom + "]";
-	}
+    /**
+     * @return the id
+     */
+    @Id
+    @GeneratedValue
+    public Long getId() {
+        return id;
+    }
 
-	/**
-	 * @return the nom
-	 */
-	public String getNom() {
-		return nom;
-	}
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	/**
-	 * @param nom
-	 *            the nom to set
-	 */
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
+    public String toString() {
+        return "Person[id=" + id + " , Nom=" + this.nom + "]";
+    }
 
-	/**
-	 * @return the prenom
-	 */
-	public String getPrenom() {
-		return prenom;
-	}
+    /**
+     * @return the nom
+     */
+    public String getNom() {
+        return nom;
+    }
 
-	/**
-	 * @param prenom
-	 *            the prenom to set
-	 */
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
+    /**
+     * @param nom
+     *            the nom to set
+     */
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 
-	/**
-	 * @return the genre
-	 */
-	public char getGenre() {
-		return genre;
-	}
+    /**
+     * @return the prenom
+     */
+    public String getPrenom() {
+        return prenom;
+    }
 
-	/**
-	 * @param genre
-	 *            the genre to set
-	 */
-	public void setGenre(char genre) {
-		this.genre = genre;
-	}
+    /**
+     * @param prenom
+     *            the prenom to set
+     */
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
 
-	/**
-	 * @return the mail
-	 */
-	public String getMail() {
-		return mail;
-	}
+    /**
+     * @return the genre
+     */
+    public char getGenre() {
+        return genre;
+    }
 
-	/**
-	 * @param mail
-	 *            the mail to set
-	 */
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
+    /**
+     * @param genre
+     *            the genre to set
+     */
+    public void setGenre(char genre) {
+        this.genre = genre;
+    }
 
-	/**
-	 * @return the dateNaiss
-	 */
-	public Date getDateNaiss() {
-		return dateNaiss;
-	}
+    /**
+     * @return the mail
+     */
+    public String getMail() {
+        return mail;
+    }
 
-	/**
-	 * @param dateNaiss
-	 *            the dateNaiss to set
-	 */
-	public void setDateNaiss(Date dateNaiss) {
-		this.dateNaiss = dateNaiss;
-	}
+    /**
+     * @param mail
+     *            the mail to set
+     */
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
 
-	/**
-	 * @return the profilFb
-	 */
-	public String getProfilFb() {
-		return profilFb;
-	}
+    /**
+     * @return the dateNaiss
+     */
+    public Date getDateNaiss() {
+        return dateNaiss;
+    }
 
-	/**
-	 * @param profilFb
-	 *            the profilFb to set
-	 */
-	public void setProfilFb(String profilFb) {
-		this.profilFb = profilFb;
-	}
+    /**
+     * @param dateNaiss
+     *            the dateNaiss to set
+     */
+    public void setDateNaiss(Date dateNaiss) {
+        this.dateNaiss = dateNaiss;
+    }
 
-	/**
-	 * @return the friends
-	 */
-	@ManyToMany
-	@JoinColumn(name = "Friends")
-	public List<Person> getFriends() {
-		return new ArrayList<Person>(this.friends);
-	}
+    /**
+     * @return the profilFb
+     */
+    public String getProfilFb() {
+        return profilFb;
+    }
 
-	/**
-	 * @param friends
-	 *            the friends to set
-	 */
-	public void setFriends(List<Person> friends) {
-		this.friends = friends;
-		// for(Person next : friends){
-		// this.friends.add(next);
-		// }
-	}
+    /**
+     * @param profilFb
+     */
+    public void setProfilFb(String profilFb) {
+        this.profilFb = profilFb;
+    }
 
-	// /**
-	// * @return the friends
-	// */
-	// public List<Person> getFriends() {
-	// return friends;
-	// }
-	//
-	// /**
-	// * @param friends the friends to set
-	// */
-	// public void setFriends(List<Person> friends) {
-	// this.friends = friends;
-	// }
-	//
-	// /**
-	// * @return the homes
-	// */
-	// public List<Home> getHomes() {
-	// return homes;
-	// }
-	//
-	// /**
-	// * @param homes the homes to set
-	// */
-	// public void setHomes(List<Home> homes) {
-	// this.homes = homes;
-	// }
+    /**
+     * @return the friends
+     */
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "Friends_Amis")
+    public List<Person> getFriends() {
+        return new ArrayList<Person>(this.friends);
+    }
+
+    /**
+     * @param friends
+     */
+    public void setFriends(List<Person> friends) {
+        this.friends = friends;
+    }
+
+    /**
+     * @return the devices
+     */
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    public List<ElectronicDevice> getDevices() {
+        return new ArrayList<ElectronicDevice>(this.devices);
+    }
+
+    /**
+     * @param devices
+     *            the devices to set
+     */
+    public void setDevices(List<ElectronicDevice> devices) {
+        this.devices = devices;
+    }
+
+    /**
+     * @return the homes
+     */
+    @OneToMany(mappedBy = "personne", cascade = CascadeType.PERSIST)
+    public List<Home> getHomes() {
+        return new ArrayList<Home>(homes);
+    }
+
+    /**
+     * @param homes
+     *            the homes to set
+     */
+    public void setHomes(List<Home> homes) {
+        this.homes = homes;
+    }
 }
